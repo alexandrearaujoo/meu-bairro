@@ -1,12 +1,12 @@
 import { Input } from "../../components/Input";
 import ButtonDefault from "../../components/Button";
-import { DivButtons, SectionForm, Form, ArrowLeft } from "./style";
-import { BsArrowLeft } from "react-icons/bs";
+import { DivButtons, SectionForm, Form } from "./style";
 import { useState } from "react";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Teste from '../../assets/pozecareca3.jpg'
+import Arrow from "../../components/ArrowLeft";
 
 interface SignUpData {
   email: string;
@@ -41,9 +41,7 @@ const SignUp = () => {
 
   return (
     <>
-      <ArrowLeft>
-        <BsArrowLeft />
-      </ArrowLeft>
+      <Arrow />
       <SectionForm>
         <img src={Teste} alt='teste'/>
 

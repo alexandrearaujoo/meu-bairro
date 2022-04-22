@@ -1,5 +1,15 @@
+import CardList from "../../components/CardList";
+import Carrousel from "../../components/Carrousel";
+import Header from "../../components/Header";
+
 const Dashboard = () => {
-  return <>Dashboard page</>;
+  return (
+    <>
+    <Header />
+    <Carrousel />
+    <CardList />
+    </>
+  )
 };
 
 export default Dashboard;

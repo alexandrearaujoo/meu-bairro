@@ -5,6 +5,7 @@ import Search from "../pages/Search";
 import SignUp from "../pages/SignUp";
 import Profile from "../pages/Profile";
 import Home from "../pages/Home";
+import BusinessPage from "../pages/BusinessPage";
 
 const Routes = () => {
   return (
@@ -26,6 +27,9 @@ const Routes = () => {
       </Route>
       <Route path="/profile">
         <Profile />
+      </Route>
+      <Route path="/businesspage">
+        <BusinessPage />
       </Route>
     </Switch>
   );

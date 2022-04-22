@@ -1,7 +1,14 @@
-const CardList = () => {
-    return (
-        <ul></ul>
-    )
-}
+import Card from "../Card";
+import { List } from "./style";
 
-export default CardList
+const CardList = () => {
+  return (
+    <List>
+      {[1, 2, 3,4,5,6,7,8,9,10].map((_) => (
+        <Card />
+      ))}
+    </List>
+  );
+};
+
+export default CardList;
