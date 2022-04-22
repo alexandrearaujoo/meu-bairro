@@ -5,26 +5,32 @@ import { useState } from "react";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import Teste from '../../assets/pozecareca3.jpg'
+import Teste from "../../assets/pozecareca3.jpg";
 import Arrow from "../../components/ArrowLeft";
+import { useHistory } from "react-router-dom";
 
 interface SignUpData {
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
-  username: string;
-  cellphone: string;
-  dataNascimento: string;
+  phone: string;
+  birthDate: string;
 }
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const history = useHistory<unknown>()
 
   const SignUpSchema = yup.object().shape({
+    firstName: yup
+      .string()
+      .required("Campo obrigatorio"),
+    lastName: yup.string().required("Campo obrigatorio"),
     email: yup.string().email("Email invalido").required("Campo obrigatorio"),
     password: yup.string().required("Campo obrigatorio"),
-    username: yup.string().required("Campo obrigatorio"),
-    cellphone: yup.string().required("Campo obrigatorio"),
-    dataNascimento: yup.string().required("Campo obrigatorio"),
+    phone: yup.string().required("Campo obrigatorio"),
+    birthDate: yup.string().required("Campo obrigatorio"),
   });
 
   const {
@@ -41,13 +47,25 @@ const SignUp = () => {
 
   return (
     <>
-      <Arrow />
+      <Arrow onClick={() => history.push('/login')}/>
       <SectionForm>
-        <img src={Teste} alt='teste'/>
+        <img src={Teste} alt="teste" />
 
         <Form onSubmit={handleSubmit(onSubmit)}>
-        <h1>Nova conta</h1>
-        <label>Insira seus dados para criar uma conta</label>
+          <h1>Nova conta</h1>
+          <label>Insira seus dados para criar uma conta</label>
+          <Input
+            placeholder="Nome"
+            setShowPassword={setShowPassword}
+            {...register("firstName")}
+            error={errors.firstName}
+          />
+          <Input
+            placeholder="Sobrenome"
+            setShowPassword={setShowPassword}
+            {...register("lastName")}
+            error={errors.lastName}
+          />
           <Input
             placeholder="Email"
             setShowPassword={setShowPassword}
@@ -64,28 +82,16 @@ const SignUp = () => {
             icon
           />
           <Input
-            placeholder="Username"
-            setShowPassword={setShowPassword}
-            {...register("username")}
-            error={errors.username}
-          />
-          <Input
             placeholder="Telefone"
             setShowPassword={setShowPassword}
-            {...register("cellphone")}
-            error={errors.cellphone}
+            {...register("phone")}
+            error={errors.phone}
           />
           <Input
             placeholder="Data de nascimento"
             setShowPassword={setShowPassword}
-            {...register("dataNascimento")}
-            error={errors.dataNascimento}
-          />
-          <Input
-            placeholder="Data de nascimento"
-            setShowPassword={setShowPassword}
-            {...register("dataNascimento")}
-            error={errors.dataNascimento}
+            {...register("birthDate")}
+            error={errors.birthDate}
           />
           <span>
             Clique aqui para ler os <a href="#">Termos de uso</a>
@@ -94,7 +100,9 @@ const SignUp = () => {
             <input type="checkbox" />{" "}
             <label>Concordo com os termos de uso.</label>
           </DivButtons>
-          <ButtonDefault type="submit" width="100%">Cadastrar</ButtonDefault>
+          <ButtonDefault type="submit" width="100%">
+            Cadastrar
+          </ButtonDefault>
         </Form>
       </SectionForm>
     </>

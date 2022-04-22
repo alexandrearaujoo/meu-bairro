@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Teste from '../../assets/pozecareca.jpg'
 import Arrow from "../../components/ArrowLeft";
+import { useHistory } from "react-router-dom";
 
 interface LoginData {
   email: string;
@@ -15,6 +16,8 @@ interface LoginData {
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
+
+  const history = useHistory<unknown>()
 
   const loginSchema = yup.object().shape({
     email: yup.string().email("Email invalido").required("Campo obrigatorio"),
@@ -62,7 +65,7 @@ const Login = () => {
               borderColor="var(--color-secondary)"
               color="var(--color-secondary)"
               type="button"
-              onClick={() => console.log("criar conta")}
+              onClick={() => history.push('/signup')}
             >
               Criar Conta
             </ButtonDefault>

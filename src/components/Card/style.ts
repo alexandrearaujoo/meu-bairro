@@ -8,6 +8,7 @@ export const CardStyled = styled.li`
     width: 90%;
     max-width: 350px;
     height: 75px;
+    cursor: pointer;
 
     div {
         div {

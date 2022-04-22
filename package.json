@@ -19,6 +19,7 @@
     "react-3d-carousels": "^1.0.2",
     "react-dom": "^18.0.0",
     "react-hook-form": "^7.30.0",
+    "react-hot-toast": "^2.2.0",
     "react-icons": "^4.3.1",
     "react-router-dom": "5",
     "react-scripts": "5.0.1",

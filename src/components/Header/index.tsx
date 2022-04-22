@@ -1,6 +1,9 @@
+import { useHistory } from 'react-router-dom'
 import { Navbar, HeaderStyled} from './style'
 
 const Header = () => {
+    const history = useHistory<unknown>()
+
     return (
         <HeaderStyled>
             <Navbar>
@@ -11,9 +14,9 @@ const Header = () => {
                     <span></span>
 
                     <ul>
-                        <li><a href="#">Dashboard</a></li>
-                        <li><a href="#">Search</a></li>
-                        <li><a href="#">Profile</a></li>
+                        <li><button onClick={() => history.push('/dashboard')}>Dashboard</button></li>
+                        <li><button onClick={() => history.push('/search')}>Search</button></li>
+                        <li><button onClick={() => history.push('/profile')}>Profile</button></li>
                     </ul>
                 </div>
             </Navbar>

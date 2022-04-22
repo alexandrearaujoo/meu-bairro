@@ -10,13 +10,11 @@ export const Navbar = styled.nav`
     -webkit-user-select: none;
     user-select: none;
 
-    a {
+    button {
       color: var(--grey-50);
       transition: color 0.3s ease;
-
-      :hover {
-        color: red;
-      }
+      border: none;
+      background-color: transparent;
     }
 
     input {

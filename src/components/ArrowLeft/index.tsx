@@ -1,9 +1,9 @@
 import { BsArrowLeft } from "react-icons/bs";
 import { ArrowLeft } from "./style";
 
-const Arrow = () => {
+const Arrow = ({...rest}) => {
   return (
-    <ArrowLeft>
+    <ArrowLeft {...rest}>
       <BsArrowLeft />
     </ArrowLeft>
   );
