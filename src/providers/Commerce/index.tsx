@@ -4,6 +4,7 @@ import {
   useCallback,
   useState,
   ReactNode,
+  useEffect,
 } from "react";
 import api from "../../services/api";
 
@@ -36,20 +37,29 @@ interface Images {
   image4?: string;
 }
 
+interface Category {
+  name?: string;
+  description?: string;
+}
+
 interface Commerce {
-  id: string
+  id: string;
+  cnpj: string;
   name: string;
   active: boolean;
   address: Address;
   contact?: Contact;
   image?: Images;
+  category?: Category;
 }
 
 interface CommerceContextData {
   commerces: Commerce[];
-  infoCommerce: Commerce[]
+  infoCommerce: Commerce[];
+  filteredCommerce: Commerce[];
   getAllCommerces: () => Promise<void>;
   getOneCommerce: (id: string) => Promise<void>;
+  filterCommerce: (search: string) => void;
 }
 
 const CommerceContext = createContext<CommerceContextData>(
@@ -68,6 +78,7 @@ const useCommerce = () => {
 const CommerceProvider = ({ children }: CommerceProviderProps) => {
   const [commerces, setCommerce] = useState<Commerce[]>([]);
   const [infoCommerce, setInfoCommerce] = useState<Commerce[]>([]);
+  const [filteredCommerce, setFilteredCommerce] = useState<Commerce[]>([]);
 
   const getAllCommerces = useCallback(async () => {
     const res = await api.get("commerce?page=1");
@@ -80,9 +91,25 @@ const CommerceProvider = ({ children }: CommerceProviderProps) => {
     setInfoCommerce([res.data]);
   }, []);
 
+  const filterCommerce = (search: string) => {
+    const commerce = commerces.filter(
+      (item) =>
+        item.name.toLowerCase().includes(search.toLowerCase()) ||
+        item.address.street.toLowerCase().includes(search.toLowerCase())
+    );
+    setFilteredCommerce(commerce);
+  };
+
   return (
     <CommerceContext.Provider
-      value={{ commerces, infoCommerce, getAllCommerces, getOneCommerce }}
+      value={{
+        commerces,
+        infoCommerce,
+        filteredCommerce,
+        getAllCommerces,
+        getOneCommerce,
+        filterCommerce,
+      }}
     >
       {children}
     </CommerceContext.Provider>
