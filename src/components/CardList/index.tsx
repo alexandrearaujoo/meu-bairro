@@ -1,11 +1,21 @@
+import { useEffect } from "react";
+import { useCommerce } from "../../providers/Commerce";
 import Card from "../Card";
 import { List } from "./style";
 
 const CardList = () => {
+
+  const {getAllCommerces, commerces} = useCommerce()
+
+  useEffect(() =>{
+    getAllCommerces()
+  },[])
+  
+
   return (
     <List>
-      {[1, 2, 3,4,5,6,7,8,9,10].map((_) => (
-        <Card />
+      {commerces.map((commerce) => (
+        <Card commerce={commerce}/>
       ))}
     </List>
   );

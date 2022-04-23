@@ -11,7 +11,7 @@ export const CardStyled = styled.li`
     cursor: pointer;
 
     div {
-        div {
+        img {
             height: 50px;
             width: 50px;
             background-color: black;

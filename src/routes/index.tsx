@@ -28,7 +28,7 @@ const Routes = () => {
       <Route path="/profile">
         <Profile />
       </Route>
-      <Route path="/businesspage">
+      <Route path="/businesspage/:id">
         <BusinessPage />
       </Route>
     </Switch>

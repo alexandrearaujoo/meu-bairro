@@ -1,14 +1,17 @@
+import { useHistory } from "react-router-dom"
 import { CardStyled } from "./style"
 
-const Card = () => {
+
+const Card = ({commerce}: any) => {
+    const history = useHistory<unknown>()
     return (
-        <CardStyled>
+        <CardStyled onClick={() => history.push(`/businesspage/${commerce.id}`)}>
             <div>
-                <div>IMG</div>
+                <img src={commerce.image.avatar} alt={commerce.name} />
             </div>
             <section>
-                <h3>Estabelecimento 1</h3>
-                <span>Descrição</span>
+                <h3>{commerce.name}</h3>
+                <span>{commerce.address.street}</span>
             </section>
         </CardStyled>
     )
