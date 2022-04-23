@@ -1,68 +1,107 @@
-import {createContext, useContext, useState, useCallback, ReactNode} from 'react'
-import api from '../../services/api'
-import toast from 'react-hot-toast'
-import { useHistory } from 'react-router-dom'
+import {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  ReactNode,
+} from "react";
+import api from "../../services/api";
+import toast from "react-hot-toast";
+import { useHistory } from "react-router-dom";
 
 interface UserProviderProps {
-    children: ReactNode
+  children: ReactNode;
+}
+
+interface TokenUser {
+  token: string;
+  userId: string;
 }
 
 interface UserCreateProps {
-    firstName: string
-    lastName: string
-    email: string
-    password: string
-    cell: string
-    birthDate: string
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  phone: string;
+  birthDate: string;
 }
 
 interface UserLoginProps {
-    email: string
-    password: string
+  email: string;
+  password: string;
 }
 
 interface UserContextData {
-    token: string
-    createUser: (data:UserCreateProps) => Promise<void>
-    loginUser: (data: UserLoginProps) => Promise<void>
+  token: string;
+  userId: string
+  createUser: (data: UserCreateProps) => Promise<void>;
+  loginUser: (data: UserLoginProps) => Promise<void>;
 }
 
-const UserContext = createContext<UserContextData>({} as UserContextData)
+const UserContext = createContext<UserContextData>({} as UserContextData);
 
 const useUser = () => {
-    const context = useContext(UserContext)
+  const context = useContext(UserContext);
 
-    if (!context) {
-        throw new Error ('teste')
+  if (!context) {
+    throw new Error("teste");
+  }
+
+  return context;
+};
+
+const UserProvider = ({ children }: UserProviderProps) => {
+  const [token, setToken] = useState<TokenUser>(() => {
+    const data = localStorage.getItem('@MeuBairro:token');
+
+    if (data) {
+      return JSON.parse(data);
     }
 
-    return context
-}
+    return {} as TokenUser;
+  });
 
-const UserProvider = ({children}:UserProviderProps) => {
-    const [token, setToken] = useState<string>(localStorage.getItem('@MeuBairro:token') || '')
-    const history = useHistory<unknown>()
+  const history = useHistory<unknown>();
 
-    const createUser = useCallback(async (data: UserCreateProps) => {
-        await api.post('user', data)
-        .then(() => toast.success('Cadastro realizado'))
-        .catch(() => toast.error('Algo deu errado'))
-    },[])
+  const createUser = useCallback(async (data: UserCreateProps) => {
+    await api
+      .post("user", data, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+      })
+      .then((res) => {
+          console.log(res)
+        toast.success("Cadastro realizado")
+        history.push('/login')
+      })
+      .catch((error) => {
+        toast.error("Algo deu errado")
+      });
+  }, []);
 
-    const loginUser = useCallback(async (data: UserLoginProps) => {
-        await api.post('login', data)
-        .then(() => {
-            toast.success('Login realizado')
-            history.push('/dashboard')
-        })
-        .catch(() => toast.error('Email ou Senha invalidos'))
-    },[])
+  const loginUser = useCallback(async (data: UserLoginProps) => {
+    await api
+      .post("login", data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then(({ data }) => {
+        setToken(data.token);
+        localStorage.setItem("@MeuBairro:token", JSON.stringify(data.token));
+        toast.success("Login realizado");
+        history.push("/dashboard");
+      })
+      .catch(() => toast.error("Email ou Senha invalidos"));
+  }, []);
 
-    return (
-        <UserContext.Provider value={{token, createUser, loginUser}}>
-            {children}
-        </UserContext.Provider>
-    )
-}
+  return (
+    <UserContext.Provider value={{ token: token.token, userId: token.userId, createUser, loginUser }}>
+      {children}
+    </UserContext.Provider>
+  );
+};
 
-export {UserProvider, useUser}
+export { UserProvider, useUser };

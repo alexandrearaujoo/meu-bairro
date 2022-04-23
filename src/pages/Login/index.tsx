@@ -8,6 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Teste from '../../assets/pozecareca.jpg'
 import Arrow from "../../components/ArrowLeft";
 import { useHistory } from "react-router-dom";
+import { useUser } from "../../providers/User";
 
 interface LoginData {
   email: string;
@@ -16,6 +17,7 @@ interface LoginData {
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const {loginUser} = useUser()
 
   const history = useHistory<unknown>()
 
@@ -33,7 +35,7 @@ const Login = () => {
   });
 
   const onSubmit = (data: LoginData) => {
-    console.log(data)
+    loginUser(data)
   };
 
   return (

@@ -7,6 +7,41 @@ const GlobalStyled = createGlobalStyle`
         box-sizing: border-box;
         outline: 0;
     }
+    * {
+  scrollbar-width: thin;
+  scrollbar-color: #9D9D9D #D7E1E3;
+}
+
+/* Chrome, Edge and Safari */
+*::-webkit-scrollbar {
+  width: 7px;
+  width: 7px;
+}
+*::-webkit-scrollbar-track {
+  border-radius: 5px;
+  background-color: #D7E1E3;
+}
+
+*::-webkit-scrollbar-track:hover {
+  background-color: #B8C0C2;
+}
+
+*::-webkit-scrollbar-track:active {
+  background-color: #B8C0C2;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #9D9D9D;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #575757;
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: #565656;
+}
     body {
         background-color: var(--white-50);
     }

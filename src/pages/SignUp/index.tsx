@@ -8,6 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Teste from "../../assets/pozecareca3.jpg";
 import Arrow from "../../components/ArrowLeft";
 import { useHistory } from "react-router-dom";
+import { useUser } from "../../providers/User";
 
 interface SignUpData {
   firstName: string;
@@ -21,6 +22,7 @@ interface SignUpData {
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const history = useHistory<unknown>()
+  const {createUser} = useUser()
 
   const SignUpSchema = yup.object().shape({
     firstName: yup
@@ -42,7 +44,7 @@ const SignUp = () => {
   });
 
   const onSubmit = (data: SignUpData) => {
-    console.log(data);
+    createUser(data);
   };
 
   return (

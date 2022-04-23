@@ -15,6 +15,7 @@ export const Navbar = styled.nav`
       transition: color 0.3s ease;
       border: none;
       background-color: transparent;
+      cursor: pointer;
     }
 
     input {
