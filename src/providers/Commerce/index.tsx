@@ -21,27 +21,28 @@ interface Address {
 }
 
 interface Contact {
-  phone1: string;
-  phone2: string;
-  instagram: string;
-  facebook: string;
-  whatsapp: string;
+  phone1?: string;
+  phone2?: string;
+  instagram?: string;
+  facebook?: string;
+  whatsapp?: string;
 }
 
 interface Images {
-  avatar: string;
-  image1: string;
-  image2: string;
-  image3: string;
-  image4: string;
+  avatar?: string;
+  image1?: string;
+  image2?: string;
+  image3?: string;
+  image4?: string;
 }
 
 interface Commerce {
+  id: string
   name: string;
   active: boolean;
   address: Address;
-  contact: Contact;
-  image: Images;
+  contact?: Contact;
+  image?: Images;
 }
 
 interface CommerceContextData {
@@ -76,7 +77,7 @@ const CommerceProvider = ({ children }: CommerceProviderProps) => {
 
   const getOneCommerce = useCallback(async (id: string) => {
     const res = await api.get(`commerce/${id}`);
-    setInfoCommerce(res.data.data);
+    setInfoCommerce([res.data]);
   }, []);
 
   return (
