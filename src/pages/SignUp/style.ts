@@ -12,6 +12,7 @@ export const SectionForm = styled.section`
             display: none;
         }
         @media screen and (min-width: 1024px){
+            width: 500px;
             display: block;
         }
     }

@@ -10,7 +10,6 @@ const CardList = () => {
   useEffect(() =>{
     getAllCommerces()
   },[])
-  
 
   return (
     <List>

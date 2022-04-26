@@ -4,10 +4,12 @@ import {
   useState,
   useCallback,
   ReactNode,
+  useEffect,
 } from "react";
 import api from "../../services/api";
 import toast from "react-hot-toast";
 import { useHistory } from "react-router-dom";
+import { useCommerce } from "../Commerce";
 
 interface UserProviderProps {
   children: ReactNode;
@@ -96,6 +98,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
       })
       .catch(() => toast.error("Email ou Senha invalidos"));
   }, []);
+
 
   return (
     <UserContext.Provider value={{ token: token.token, userId: token.userId, createUser, loginUser }}>

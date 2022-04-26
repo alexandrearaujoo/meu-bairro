@@ -4,21 +4,19 @@ export const Section = styled.section`
   width: 90%;
   max-width: 1200px;
   height: 100%;
-  box-shadow: 2px 4px 13px -2px rgba(38, 0, 255, 0.73);
-  margin: 0 auto;
+  margin: 25px auto;
   border-radius: 15px;
   h1 {
     text-align: center;
   }
   @media screen and (min-width: 1024px) {
     display: flex;
-    height: 580px;
+    height: 500px;
   }
 `;
 
 export const SectionAddress = styled.section`
   display: block;
-  background-color: #fff;
   width: 100%;
   margin: 0 auto;
 
@@ -29,33 +27,26 @@ export const SectionAddress = styled.section`
     margin: 0 auto;
     border-bottom: 1px solid;
   }
-  h1 {
-    font-size: 20px;
-    font-family: "Comfortaa";
-  }
 `;
 
 export const DivPhoto = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
+  margin-top: 5px;
+  height: 300px;
   align-items: center;
-  height: 290px;
   justify-content: space-evenly;
 
   figure {
     img {
-      width: 100px;
-      height: 100px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
     }
   }
-  h2,
-  h1 {
-    font-family: "Comfortaa";
-  }
   h2 {
     font-size: 18px;
+    font-family: "Comfortaa";
   }
   div {
     display: flex;
@@ -69,6 +60,13 @@ export const DivPhoto = styled.div`
       height: auto;
     }
   }
+  section {
+    button {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
+  }
 
   @media screen and (min-width: 1024px) {
     width: 350px;
@@ -79,30 +77,32 @@ export const SectionInfos = styled.section`
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 240px;
+  background-color: var(--white);
+  overflow-y: scroll;
+
+  @media screen and (min-width: 1024px) {
+    height: 100%;
+  }
 `;
 
 export const SectionGalery = styled.section`
-  background-color: var(--white);
   height: 100%;
-  h1 {
-    font-size: 18px;
-    font-family: "Comfortaa";
-  }
+  margin-bottom: 15px;
+
   div {
     display: flex;
     overflow-x: scroll;
     @media screen and (min-width: 1024px) {
       flex-wrap: wrap;
-      width: 84%;
-      max-width: 595px;
       margin: 0 auto;
       justify-content: space-evenly;
       overflow: hidden;
       margin-top: 5px;
     }
     img {
-      width: 200px;
-      height: 200px;
+      width: 170px;
+      height: 170px;
       margin-left: 10px;
       @media screen and (min-width: 1024px) {
         margin: 0;
@@ -125,4 +125,58 @@ export const Div = styled.div`
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+`;
+
+export const SectionFeedback = styled.section`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  margin-top: 15px;
+
+  @media screen and (min-width: 728px){
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  section {
+  width: 270px;
+  height: 135px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 8px;
+  margin-top: 15px;
+  }
+
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 130px;
+
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+  }
+  button {
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    font-family: 'Roboto';
+
+    :hover {
+      color: #f12f12;
+    }
+  }
+`;
+
+export const Title = styled.h1`
+  font-size: 18px;
+  font-family: "Comfortaa";
 `;

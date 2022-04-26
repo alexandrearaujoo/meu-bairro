@@ -5,7 +5,7 @@ import { useState } from "react";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import Teste from "../../assets/pozecareca3.jpg";
+import ImgSignup from "../../assets/background2.svg";
 import Arrow from "../../components/ArrowLeft";
 import { useHistory } from "react-router-dom";
 import { useUser } from "../../providers/User";
@@ -51,7 +51,7 @@ const SignUp = () => {
     <>
       <Arrow onClick={() => history.push('/login')}/>
       <SectionForm>
-        <img src={Teste} alt="teste" />
+        <img src={ImgSignup} alt="Background SignUp" />
 
         <Form onSubmit={handleSubmit(onSubmit)}>
           <h1>Nova conta</h1>

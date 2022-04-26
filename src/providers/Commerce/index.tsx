@@ -4,7 +4,6 @@ import {
   useCallback,
   useState,
   ReactNode,
-  useEffect,
 } from "react";
 import api from "../../services/api";
 
@@ -38,8 +37,14 @@ interface Images {
 }
 
 interface Category {
-  name?: string;
-  description?: string;
+  name: string;
+  description: string;
+}
+
+interface FeedBack {
+  rate: number
+  comment: string
+  feedbackOwnerId: string
 }
 
 interface Commerce {
@@ -48,9 +53,10 @@ interface Commerce {
   name: string;
   active: boolean;
   address: Address;
-  contact?: Contact;
-  image?: Images;
-  category?: Category;
+  contact: Contact;
+  image: Images;
+  category: Category;
+  feedback: FeedBack
 }
 
 interface CommerceContextData {
@@ -99,7 +105,7 @@ const CommerceProvider = ({ children }: CommerceProviderProps) => {
     );
     setFilteredCommerce(commerce);
   };
-
+  
   return (
     <CommerceContext.Provider
       value={{

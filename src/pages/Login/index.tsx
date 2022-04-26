@@ -5,7 +5,7 @@ import { useState } from "react";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import Teste from '../../assets/pozecareca.jpg'
+import ImgLogin from '../../assets/background01.svg'
 import Arrow from "../../components/ArrowLeft";
 import { useHistory } from "react-router-dom";
 import { useUser } from "../../providers/User";
@@ -42,7 +42,7 @@ const Login = () => {
     <>
     <Arrow />
       <SectionForm>
-      <img src={Teste} alt='teste'/>
+      <img src={ImgLogin} alt='Background Login'/>
         
         <Form onSubmit={handleSubmit(onSubmit)}>
         <h1>Login</h1>

@@ -23,7 +23,7 @@ const BusinessPage = () => {
       <Header />
       <Section>
         {infoCommerce.map((commerce) => (
-          <InfoCommerce commerce={commerce}/>
+          <InfoCommerce key={commerce.id} commerce={commerce}/>
         ))}
       </Section>
     </>
