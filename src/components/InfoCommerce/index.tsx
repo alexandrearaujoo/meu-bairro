@@ -1,28 +1,34 @@
-import {
-  Section,
-  SectionAddress,
-  DivPhoto,
-  SectionInfos,
-  SectionGalery,
-  SectionFeedback,
-  Div,
-  Title
-} from "./style";
+import { Section, DivPhoto, SectionInfos, Sessions } from "./style";
 import {
   BsInstagram,
   BsFacebook,
   BsWhatsapp,
   BsPhone,
   BsTelephone,
-  BsFillStarFill
+  BsFillStarFill,
+  BsImageFill,
+  BsFillGeoAltFill,
 } from "react-icons/bs";
-import Rating from '@mui/material/Rating'
-import { useUser } from "../../providers/User";
+import { useState } from "react";
+import Address from "../Address";
+import Galery from "../Galery";
+import FeedBack from "../Feedback";
+import ButtonIcon from "../ButtonIcon";
 
 const InfoCommerce = ({ commerce }: any) => {
+  const [showAddress, setShowAddress] = useState<boolean>(true);
+  const [showGalery, setShowGalery] = useState<boolean>(false);
+  const [showFeedback, setShowFeedback] = useState<boolean>(false);
 
-  const {userId} = useUser()
-  console.log(commerce.owner)
+  const changeSession = (
+    address: boolean,
+    galery: boolean,
+    feedback: boolean
+  ) => {
+    setShowAddress(address);
+    setShowGalery(galery);
+    setShowFeedback(feedback);
+  };
 
   return (
     <Section>
@@ -51,50 +57,27 @@ const InfoCommerce = ({ commerce }: any) => {
           </span>
         </div>
         <section>
-          <button type="button"> <BsFillStarFill /> Avaliar comercio</button>
+          <ButtonIcon type="button" icon={BsFillStarFill}>
+            Avaliar comercio
+          </ButtonIcon>
         </section>
       </DivPhoto>
       <SectionInfos>
-        <SectionAddress>
-          <Title>Endereço</Title>
-          <div>
-            <Div>
-              <span>Cidade: {commerce.address.city}</span>
-              <span>Bairro: {commerce.address.neighborhood}</span>
-              <span>Estado: {commerce.address.state}</span>
-            </Div>
-            <Div>
-              <span>Rua: {commerce.address.street}</span>
-              <span>Numero: {commerce.address.number}</span>
-              <span>Complemento: {commerce.address.complement}</span>
-            </Div>
-          </div>
-        </SectionAddress>
-        <SectionGalery>
-          <Title>Galeria</Title>
-          <div>
-            <img src={commerce.image?.image1} alt="" />
-            <img src={commerce.image?.image2} alt="" />
-            <img src={commerce.image?.image3} alt="" />
-            <img src={commerce.image?.image4} alt="" />
-          </div>
-        </SectionGalery>
-        <Title>Avaliações</Title>
-        <SectionFeedback>
-        {commerce.feedback.map((item: any) => (
-          <>
-          <section>
-            <div>
-            <img src={item.owner.avatarUrl} alt="" />
-            <span>{item.owner.firstName}</span>
-            </div>
-            <Rating name="half-rating-read" defaultValue={item.rate} precision={0.5} readOnly />
-            <span>{item.comment}</span>
-            {item.feedbackOwnerId === userId && <button>Remover avaliação</button>}
-            </section>
-          </>
-        ))}
-        </SectionFeedback>
+        <Sessions>
+          <button onClick={() => changeSession(true, false, false)}>
+            <BsFillGeoAltFill /> Endereco
+          </button>
+          <button onClick={() => changeSession(false, true, false)}>
+            <BsImageFill /> Galeria
+          </button>
+          <button onClick={() => changeSession(false, false, true)}>
+            <BsFillStarFill /> Avaliações
+          </button>
+        </Sessions>
+
+        {showAddress && <Address commerce={commerce} />}
+        {showGalery && <Galery commerce={commerce} />}
+        {showFeedback && <FeedBack commerce={commerce} />}
       </SectionInfos>
     </Section>
   );

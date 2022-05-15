@@ -2,6 +2,7 @@ import { useHistory } from "react-router-dom";
 import { CardStyled } from "./style";
 
 const Card = ({ commerce }: any) => {
+
   const history = useHistory<unknown>();
   return (
     <CardStyled onClick={() => history.push(`/businesspage/${commerce.id}`)}>
@@ -10,7 +11,7 @@ const Card = ({ commerce }: any) => {
       </div>
       <section>
         <h3>{commerce.name}</h3>
-        <h3>Lanches</h3>
+        {commerce.category.map((commerce: any) =><h3>{commerce.name}</h3>)}
         <span>{commerce.address.street}</span>
       </section>
     </CardStyled>
