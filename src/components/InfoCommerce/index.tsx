@@ -14,11 +14,13 @@ import Address from "../Address";
 import Galery from "../Galery";
 import FeedBack from "../Feedback";
 import ButtonIcon from "../ButtonIcon";
+import ModalFeedBack from "../ModalFeedback";
 
 const InfoCommerce = ({ commerce }: any) => {
   const [showAddress, setShowAddress] = useState<boolean>(true);
   const [showGalery, setShowGalery] = useState<boolean>(false);
   const [showFeedback, setShowFeedback] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false)
 
   const changeSession = (
     address: boolean,
@@ -57,7 +59,7 @@ const InfoCommerce = ({ commerce }: any) => {
           </span>
         </div>
         <section>
-          <ButtonIcon type="button" icon={BsFillStarFill}>
+          <ButtonIcon type="button" icon={BsFillStarFill} onClick={() => setOpen(true)}>
             Avaliar comercio
           </ButtonIcon>
         </section>
@@ -78,6 +80,7 @@ const InfoCommerce = ({ commerce }: any) => {
         {showAddress && <Address commerce={commerce} />}
         {showGalery && <Galery commerce={commerce} />}
         {showFeedback && <FeedBack commerce={commerce} />}
+        {open && <ModalFeedBack open={open} setOpen={setOpen}/>}
       </SectionInfos>
     </Section>
   );

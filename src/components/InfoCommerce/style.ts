@@ -51,6 +51,11 @@ export const DivPhoto = styled.div`
       background-color: transparent;
       border: none;
       cursor: pointer;
+      width: auto;
+      
+      svg {
+        margin-right: 5px;
+      }
     }
   }
 
