@@ -41,7 +41,6 @@ export const Section = styled.section`
   flex-direction: column;
   align-items: center;
   margin-top: 15px;
-  border-bottom: 1px solid #000;
   @media screen and (min-width: 1024px) {
     align-items: inherit;
   }
@@ -54,3 +53,24 @@ export const Section = styled.section`
     }
   }
 `;
+
+export const Categories = styled.div`
+  width: 95%;
+  display: flex;
+  flex-wrap: wrap;
+
+  button {
+    font-size: 12px;
+    border: 2px solid transparent;
+    :hover {
+      border-bottom: 2px solid var(--color-primary);
+      background-color: transparent;
+    }
+  }
+`
+export const Empty = styled.div`
+  margin-top: 5px;
+  h1 {
+    text-align: center;
+  }
+`

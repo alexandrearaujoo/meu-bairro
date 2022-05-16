@@ -42,9 +42,9 @@ interface Category {
 }
 
 interface FeedBack {
-  rate: number
-  comment: string
-  feedbackOwnerId: string
+  rate: number;
+  comment: string;
+  feedbackOwnerId: string;
 }
 
 interface Commerce {
@@ -55,8 +55,8 @@ interface Commerce {
   address: Address;
   contact: Contact;
   image: Images;
-  category: Category;
-  feedback: FeedBack
+  category: Category[];
+  feedback: FeedBack;
 }
 
 interface CommerceContextData {
@@ -99,13 +99,13 @@ const CommerceProvider = ({ children }: CommerceProviderProps) => {
 
   const filterCommerce = (search: string) => {
     const commerce = commerces.filter(
-      (item) =>
-        item.name.toLowerCase().includes(search.toLowerCase()) ||
-        item.address.street.toLowerCase().includes(search.toLowerCase())
+      ({ name, address }) =>
+        name.toLowerCase().includes(search.toLowerCase()) ||
+        address.street.toLowerCase().includes(search.toLowerCase())
     );
     setFilteredCommerce(commerce);
   };
-  
+
   return (
     <CommerceContext.Provider
       value={{
